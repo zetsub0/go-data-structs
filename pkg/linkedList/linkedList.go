@@ -15,11 +15,8 @@ type LinkedList[T comparable] struct {
 }
 
 // New returns a new empty LinkedList.
-func New[T comparable](values []T) *LinkedList[T] {
+func New[T comparable]() *LinkedList[T] {
 	ll := &LinkedList[T]{}
-	for _, value := range values {
-		ll.Append(value)
-	}
 	return ll
 }
 
@@ -64,13 +61,21 @@ func (l *LinkedList[T]) Insert(v T, position int) error {
 		return nil
 	}
 
-	prevNode, _ := l.getNodeAt(position - 1)
+	prevNode, _ := l.getNodeAt(position)
 	newNode := &node[T]{value: v, next: prevNode.next}
 	prevNode.next = newNode
 	l.length++
 
 	return nil
+}
 
+// ParseArray takes a slice of type T and appends each item to the list,
+// in order. This is a convenience function for quickly building a list
+// from a slice of values.
+func (l *LinkedList[T]) ParseArray(values []T) {
+	for _, v := range values {
+		l.Append(v)
+	}
 }
 
 // RemoveHead removes head node from Linked list.
