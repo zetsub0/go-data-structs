@@ -1,3 +1,4 @@
+// Package linkedlist provides a basic linked list implementation.
 package linkedlist
 
 import (
@@ -9,6 +10,7 @@ type node[T comparable] struct {
 	next  *node[T]
 }
 
+// LinkedList is a basic linked list implementation.
 type LinkedList[T comparable] struct {
 	head   *node[T]
 	length int
